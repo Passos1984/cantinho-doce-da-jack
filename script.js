@@ -4,24 +4,26 @@ const produtos = [
     { id: 1, nome: "Açaí Tradicional", preco: 15.00, categoria: "acai", img: "img/acai.jpg" },
     { id: 2, nome: "Barca de Açaí", preco: 35.00, categoria: "acai", img: "img/barca.jpg" },
 
-    // --- SEÇÃO DE PASTÉIS (Recuperados aqui!) ---
+    // --- SEÇÃO DE PASTÉIS ---
     { id: 10, nome: "Pastel de Carne", preco: 10.00, categoria: "pastel", img: "img/pastel-carne.jpg" },
     { id: 11, nome: "Pastel de Queijo", preco: 10.00, categoria: "pastel", img: "img/pastel-queijo.jpg" },
     { id: 12, nome: "Pastel Frango c/ Catupiry", preco: 12.00, categoria: "pastel", img: "img/pastel-frango.jpg" },
     { id: 13, nome: "Pastel de Calabresa", preco: 10.00, categoria: "pastel", img: "img/pastel-calabresa.jpg" },
     { id: 14, nome: "Pastel de Chocolate", preco: 12.00, categoria: "pastel", img: "img/pastel-chocolate.jpg" },
     
-    // --- SEÇÃO DE BEBIDAS (Recuperando agora!) ---
+    // --- SEÇÃO DE BEBIDAS ---
     { id: 30, nome: "Coca-Cola 350ml", preco: 6.00, categoria: "bebida" },
     { id: 31, nome: "Guaraná 350ml", preco: 6.00, categoria: "bebida" },
     { id: 32, nome: "Suco de Laranja 500ml", preco: 10.00, categoria: "bebida" },
     { id: 33, nome: "Água Mineral 500ml", preco: 4.00, categoria: "bebida" }
 ];
-// O resto do seu código começa aqui...
+
+// 1. Nossas caixas de memória
 let carrinho = [];
 let valorTotal = 0;
 
-// Lista de produtos indisponíveis
+// Lista de produtos indisponíveis (altere aqui para mudar a disponibilidade)
+// Use os nomes exatamente como aparecem nos botões
 const produtosIndisponiveis = [
     "Crepes"
 ];
