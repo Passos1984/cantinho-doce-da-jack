@@ -1,3 +1,7 @@
+// ==========================================
+// DADOS E CONFIGURAÇÕES GLOBAIS
+// ==========================================
+
 // Lista oficial de produtos do Cantinho Doce da Jack
 const produtos = [
     // --- SEÇÃO DE AÇAÍ ---
@@ -18,17 +22,23 @@ const produtos = [
     { id: 33, nome: "Água Mineral 500ml", preco: 4.00, categoria: "bebida" }
 ];
 
-// 1. Nossas caixas de memória
+// Caixas de memória
 let carrinho = [];
 let valorTotal = 0;
 
-// Lista de produtos indisponíveis (altere aqui para mudar a disponibilidade)
-// Use os nomes exatamente como aparecem nos botões
+// 🔴 CONTROLE DE DISPONIBILIDADE DO CREPE (ALTERE AQUI)
+let crepeDisponivel = false;   // false = indisponível, true = disponível
+
+// Lista de produtos indisponíveis por nome (para outros produtos que usam .btn-adicionar)
 const produtosIndisponiveis = [
-    "Crepes"
+    // "Crepes"  // removido porque já tratamos separadamente
 ];
 
-// Inicializa o estado de disponibilidade dos produtos
+// ==========================================
+// INICIALIZAÇÃO DA PÁGINA
+// ==========================================
+
+// Inicializa o estado de disponibilidade (para produtos com botão .btn-adicionar)
 function inicializarDisponibilidade() {
     produtosIndisponiveis.forEach(nome => {
         let botoes = document.querySelectorAll('.btn-adicionar');
@@ -40,26 +50,24 @@ function inicializarDisponibilidade() {
             }
         });
     });
+    
+    // 👇 Desabilita visualmente o botão do Crepe (caso ele exista com onclick)
+    let botaoCrepe = document.querySelector('button[onclick="abrirModalCrepe()"]');
+    if (botaoCrepe && !crepeDisponivel) {
+        botaoCrepe.disabled = true;
+        botaoCrepe.classList.add('btn-indisponivel');
+        botaoCrepe.innerText = 'Indisponível';
+        let card = botaoCrepe.closest('.card-produto');
+        if (card) card.classList.add('indisponivel');
+    }
 }
 
 // Chama a inicialização quando a página carrega
 window.onload = inicializarDisponibilidade;
 
-// Caixas temporárias para lembrar qual açaí o cliente clicou antes de abrir o Modal
-let produtoSendoMontadoNome = "";
-let produtoSendoMontadoPreco = 0;
-
-// Função para produtos de tamanho único (Churros, Barca)
-function adicionarDireto(nomeProduto, precoProduto) {
-    carrinho.push({
-        nome: nomeProduto,
-        preco: precoProduto
-    });
-
-    valorTotal = valorTotal + precoProduto;
-    atualizarBotaoCarrinho();
-    alert(nomeProduto + " adicionado ao carrinho!");
-}
+// ==========================================
+// AUXILIARES DE DISPONIBILIDADE VISUAL
+// ==========================================
 
 function marcarProdutoIndisponivel(botaoElemento) {
     if (!botaoElemento) return;
@@ -81,28 +89,87 @@ function marcarProdutoDisponivel(botaoElemento, textoOriginal) {
     botaoElemento.innerText = textoOriginal || '+ Adicionar';
 }
 
-// 2. Esta função agora não joga no carrinho direto, ela ABRE A JANELA
+// ==========================================
+// VARIÁVEIS E FUNÇÕES DO MODAL DE AÇAÍ
+// ==========================================
+
+let produtoSendoMontadoNome = "";
+let produtoSendoMontadoPreco = 0;
+
 function adicionarAoCarrinho(nomeProduto, precoProduto) {
-    // Guarda o nome e preço do açaí escolhido
     produtoSendoMontadoNome = nomeProduto;
     produtoSendoMontadoPreco = precoProduto;
-
-    // Muda o título e o preço lá dentro da janela do Modal
     document.getElementById("modal-titulo").innerText = "Montando: " + nomeProduto;
     document.getElementById("modal-preco-base").innerText = "Escolha o tamanho";
-
-    // O truque: removemos a classe "oculta" para a janela aparecer na tela!
     document.getElementById("modal-complementos").classList.remove("oculta");
 }
 
-// Funções para o Modal de Pastéis
+function fecharModal() {
+    document.getElementById("modal-complementos").classList.add("oculta");
+}
+
+function confirmarAcai() {
+    let tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
+    if (!tamanhoSelecionado) {
+        alert("Por favor, escolha um tamanho!");
+        return;
+    }
+
+    let nomesDosComplementos = [];
+    let valorDosComplementos = 0;
+    let precoTamanho = parseFloat(tamanhoSelecionado.dataset.preco);
+    let limiteGratis = parseInt(tamanhoSelecionado.dataset.max);
+    let nomeTamanho = tamanhoSelecionado.value;
+
+    let gratisMarcados = document.querySelectorAll('.add-gratis:checked');
+    let countGratis = 0;
+    gratisMarcados.forEach(function(item) {
+        if (countGratis < limiteGratis || limiteGratis === 0) {
+            nomesDosComplementos.push(item.value);
+        } else {
+            nomesDosComplementos.push(item.value + " (+R$3,00)");
+            valorDosComplementos += 3.00;
+        }
+        countGratis++;
+    });
+
+    let pagosMarcados = document.querySelectorAll('.add-pago:checked');
+    pagosMarcados.forEach(function(item) {
+        nomesDosComplementos.push(item.value);
+        valorDosComplementos += parseFloat(item.dataset.preco);
+    });
+
+    let precoFinalDoItem = precoTamanho + valorDosComplementos;
+    let nomeFinalParaCarrinho = nomeTamanho;
+    if (nomesDosComplementos.length > 0) {
+        nomeFinalParaCarrinho = nomeFinalParaCarrinho + " (Com: " + nomesDosComplementos.join(", ") + ")";
+    }
+
+    carrinho.push({
+        nome: nomeFinalParaCarrinho,
+        preco: precoFinalDoItem
+    });
+
+    valorTotal += precoFinalDoItem;
+    atualizarBotaoCarrinho();
+
+    let todosCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+    todosCheckboxes.forEach(box => box.checked = false);
+
+    fecharModal();
+}
+
+// ==========================================
+// FUNÇÕES PARA PASTÉIS, CREPES E BEBIDAS
+// ==========================================
+
+// ------------------ PASTÉIS ------------------
 function abrirModalPastel() {
     document.getElementById("modal-pastel").classList.remove("oculta");
 }
 
 function fecharModalPastel() {
     document.getElementById("modal-pastel").classList.add("oculta");
-    // Limpa seleção
     let pasteis = document.querySelectorAll('input[name="pastel"]');
     pasteis.forEach(p => p.checked = false);
 }
@@ -113,22 +180,21 @@ function confirmarPastel() {
         alert("Por favor, escolha um sabor de pastel!");
         return;
     }
-
     let nomePastel = pastelSelecionado.value;
     let precoPastel = parseFloat(pastelSelecionado.dataset.preco);
-
-    carrinho.push({
-        nome: nomePastel,
-        preco: precoPastel
-    });
-
-    valorTotal = valorTotal + precoPastel;
+    carrinho.push({ nome: nomePastel, preco: precoPastel });
+    valorTotal += precoPastel;
     atualizarBotaoCarrinho();
     fecharModalPastel();
 }
 
-// Funções para o Modal de Crepes
+// ------------------ CREPES (agora com indisponibilidade) ------------------
 function abrirModalCrepe() {
+    // 🚫 VERIFICA SE O CREPE ESTÁ DISPONÍVEL
+    if (!crepeDisponivel) {
+        alert("Desculpe, os crepes estão indisponíveis no momento.");
+        return;
+    }
     document.getElementById("modal-crepe").classList.remove("oculta");
 }
 
@@ -144,21 +210,15 @@ function confirmarCrepe() {
         alert("Por favor, escolha um crepe!");
         return;
     }
-
     let nomeCrepe = crepeSelecionado.value;
     let precoCrepe = parseFloat(crepeSelecionado.dataset.preco);
-
-    carrinho.push({
-        nome: nomeCrepe,
-        preco: precoCrepe
-    });
-
-    valorTotal = valorTotal + precoCrepe;
+    carrinho.push({ nome: nomeCrepe, preco: precoCrepe });
+    valorTotal += precoCrepe;
     atualizarBotaoCarrinho();
     fecharModalCrepe();
 }
 
-// Funções para o Modal de Bebidas
+// ------------------ BEBIDAS ------------------
 function abrirModalBebidas() {
     document.getElementById("modal-bebidas").classList.remove("oculta");
 }
@@ -175,99 +235,27 @@ function confirmarBebida() {
         alert("Por favor, escolha uma bebida!");
         return;
     }
-
     let nomeBebida = bebidaSelecionada.value;
     let precoBebida = parseFloat(bebidaSelecionada.dataset.preco);
-
-    carrinho.push({
-        nome: nomeBebida,
-        preco: precoBebida
-    });
-
-    valorTotal = valorTotal + precoBebida;
+    carrinho.push({ nome: nomeBebida, preco: precoBebida });
+    valorTotal += precoBebida;
     atualizarBotaoCarrinho();
     fecharModalBebidas();
 }
 
-// 3. Função para fechar a janela (chamada no X)
-function fecharModal() {
-    // Colocamos a classe "oculta" de volta, fazendo a janela sumir
-    document.getElementById("modal-complementos").classList.add("oculta");
-}
+// ==========================================
+// PRODUTOS DE TAMANHO ÚNICO (CHURROS, BARCA...)
+// ==========================================
 
-// 4. A Inteligência do botão "Confirmar Adicionais" de dentro da Janela (CORRIGIDO AQUI)
-function confirmarAcai() {
-    
-    // Primeiro, verifica se um tamanho foi selecionado
-    let tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
-    if (!tamanhoSelecionado) {
-        alert("Por favor, escolha um tamanho!");
-        return;
-    }
-
-    let nomesDosComplementos = [];
-    let valorDosComplementos = 0;
-
-    // Pega o preço e limite do tamanho selecionado
-    let precoTamanho = parseFloat(tamanhoSelecionado.dataset.preco);
-    let limiteGratis = parseInt(tamanhoSelecionado.dataset.max);
-    let nomeTamanho = tamanhoSelecionado.value;
-
-    // Procura todos os adicionais GRÁTIS que o cliente marcou
-    let gratisMarcados = document.querySelectorAll('.add-gratis:checked');
-    let countGratis = 0;
-    gratisMarcados.forEach(function(item) {
-        if (countGratis < limiteGratis || limiteGratis === 0) {
-            // Dentro do limite grátis
-            nomesDosComplementos.push(item.value);
-        } else {
-            // Acima do limite, cobra R$ 3,00 por adicional extra
-            nomesDosComplementos.push(item.value + " (+R$3,00)");
-            valorDosComplementos += 3.00;
-        }
-        countGratis++;
-    });
-
-    // Procura todos os adicionais PAGOS que o cliente marcou
-    let pagosMarcados = document.querySelectorAll('.add-pago:checked');
-    pagosMarcados.forEach(function(item) {
-        nomesDosComplementos.push(item.value);
-        // Pega o preço extra e soma
-        valorDosComplementos = valorDosComplementos + parseFloat(item.dataset.preco);
-    });
-
-    // Calcula o preço final (Tamanho + Adicionais)
-    let precoFinalDoItem = precoTamanho + valorDosComplementos;
-
-    // Monta o nome completão para aparecer no WhatsApp
-    let nomeFinalParaCarrinho = nomeTamanho;
-    if (nomesDosComplementos.length > 0) {
-        // Junta todos os complementos separados por vírgula
-        nomeFinalParaCarrinho = nomeFinalParaCarrinho + " (Com: " + nomesDosComplementos.join(", ") + ")";
-    }
-
-    // Finalmente, joga o açaí montado na nossa gaveta oficial
-    carrinho.push({
-        nome: nomeFinalParaCarrinho,
-        preco: precoFinalDoItem
-    });
-
-    // Soma no dinheiro total do caixa e atualiza o botão verde
-    valorTotal = valorTotal + precoFinalDoItem;
+function adicionarDireto(nomeProduto, precoProduto) {
+    carrinho.push({ nome: nomeProduto, preco: precoProduto });
+    valorTotal += precoProduto;
     atualizarBotaoCarrinho();
-
-    // Limpa todas as caixinhas marcadas para o próximo cliente/açaí
-    let todosCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-    todosCheckboxes.forEach(function(box) {
-        box.checked = false;
-    });
-
-    // Esconde a janela
-    fecharModal();
+    alert(nomeProduto + " adicionado ao carrinho!");
 }
 
 // ==========================================
-// FUNÇÕES EXCLUSIVAS DO COMBO FAMÍLIA
+// COMBO FAMÍLIA
 // ==========================================
 
 function abrirModalCombo() {
@@ -276,30 +264,6 @@ function abrirModalCombo() {
 
 function fecharModalCombo() {
     document.getElementById("modal-combo").classList.add("oculta");
-}
-
-function confirmarCombo() {
-    let copo1 = capturarCopoCombo('combo-copo1', 6, 'Copo 1 (550ml)');
-    let copo2 = capturarCopoCombo('combo-copo2', 6, 'Copo 2 (550ml)');
-    let copo3 = capturarCopoCombo('combo-copo3', 4, 'Copo 3 (330ml)');
-    let copo4 = capturarCopoCombo('combo-copo4', 4, 'Copo 4 (330ml)');
-
-    let precoFinal = 65.00 + copo1.valorExtra + copo2.valorExtra + copo3.valorExtra + copo4.valorExtra;
-    
-    let descricaoFinal = "Combo Família\n  ↳ " + copo1.desc + "\n  ↳ " + copo2.desc + "\n  ↳ " + copo3.desc + "\n  ↳ " + copo4.desc;
-
-    carrinho.push({
-        nome: descricaoFinal,
-        preco: precoFinal
-    });
-
-    valorTotal += precoFinal;
-    atualizarBotaoCarrinho();
-    
-    let todosCheckboxes = document.getElementById('modal-combo').querySelectorAll('input[type="checkbox"]');
-    todosCheckboxes.forEach(box => box.checked = false);
-
-    fecharModalCombo();
 }
 
 function capturarCopoCombo(classeCopo, limiteGratis, nomeCopo) {
@@ -325,13 +289,32 @@ function capturarCopoCombo(classeCopo, limiteGratis, nomeCopo) {
     });
 
     let desc = ingredientes.length > 0 ? `${nomeCopo} com: ${ingredientes.join(', ')}` : `${nomeCopo} (Puro)`;
-    
     return { desc: desc, valorExtra: valorExtra };
 }
 
+function confirmarCombo() {
+    let copo1 = capturarCopoCombo('combo-copo1', 6, 'Copo 1 (550ml)');
+    let copo2 = capturarCopoCombo('combo-copo2', 6, 'Copo 2 (550ml)');
+    let copo3 = capturarCopoCombo('combo-copo3', 4, 'Copo 3 (330ml)');
+    let copo4 = capturarCopoCombo('combo-copo4', 4, 'Copo 4 (330ml)');
+
+    let precoFinal = 65.00 + copo1.valorExtra + copo2.valorExtra + copo3.valorExtra + copo4.valorExtra;
+    let descricaoFinal = "Combo Família\n  ↳ " + copo1.desc + "\n  ↳ " + copo2.desc + "\n  ↳ " + copo3.desc + "\n  ↳ " + copo4.desc;
+
+    carrinho.push({ nome: descricaoFinal, preco: precoFinal });
+    valorTotal += precoFinal;
+    atualizarBotaoCarrinho();
+
+    let todosCheckboxes = document.getElementById('modal-combo').querySelectorAll('input[type="checkbox"]');
+    todosCheckboxes.forEach(box => box.checked = false);
+
+    fecharModalCombo();
+}
+
+// ==========================================
+// CARRINHO E FINALIZAÇÃO
 // ==========================================
 
-// 5. A função ajudante que muda o texto do botão verde
 function atualizarBotaoCarrinho() {
     let botaoElemento = document.getElementById("btn-carrinho");
     let quantidade = carrinho.length;
@@ -339,7 +322,6 @@ function atualizarBotaoCarrinho() {
     botaoElemento.innerHTML = `🛒 Ver Carrinho (${quantidade}) - R$ ${totalFormatado}`;
 }
 
-// Funções do Modal do Carrinho
 function abrirModalCarrinho() {
     if (carrinho.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -356,9 +338,7 @@ function fecharModalCarrinho() {
 function renderizarCarrinho() {
     let lista = document.getElementById("lista-carrinho");
     let totalSpan = document.getElementById("total-carrinho");
-    
     lista.innerHTML = "";
-    
     carrinho.forEach(function(item, index) {
         let itemDiv = document.createElement("div");
         itemDiv.className = "item-carrinho";
@@ -371,23 +351,21 @@ function renderizarCarrinho() {
         `;
         lista.appendChild(itemDiv);
     });
-    
     totalSpan.innerText = valorTotal.toFixed(2).replace(".", ",");
 }
 
 function removerDoCarrinho(index) {
     let itemRemovido = carrinho[index];
-    valorTotal = valorTotal - itemRemovido.preco;
+    valorTotal -= itemRemovido.preco;
     carrinho.splice(index, 1);
     atualizarBotaoCarrinho();
     renderizarCarrinho();
-    
     if (carrinho.length === 0) {
         fecharModalCarrinho();
     }
 }
 
-// 6. A função que empacota tudo e manda pro WhatsApp
+// ✅ FUNÇÃO CORRIGIDA (sem erro de sintaxe)
 function finalizarPedido() {
     if (carrinho.length === 0) {
         alert("Seu carrinho está vazio! Adicione um açaí primeiro.");
@@ -395,19 +373,13 @@ function finalizarPedido() {
     }
 
     let mensagem = "Olá! Gostaria de fazer o seguinte pedido:\n\n";
-
     carrinho.forEach(function(item) {
-        mensagem = mensagem + "- " + item.nome + " (R$ " + item.preco.toFixed(2) + ")\n";
+        mensagem += "- " + item.nome + " (R$ " + item.preco.toFixed(2) + ")\n";
     });
-
-    mensagem = mensagem + "\n*Total do Pedido: R$ " + valorTotal.toFixed(2) + "*";
+    mensagem += "\n*Total do Pedido: R$ " + valorTotal.toFixed(2) + "*";
 
     let mensagemFormatada = encodeURIComponent(mensagem);
-    
-    // 👇 OLHA A MÁGICA AQUI 👇
-    // O atob() vai desembaralhar o número apenas quando o cliente clicar no botão
-    let telefoneWhatsApp = atob("NTU1MTk4NTg2NjEzMw=="); 
-
+    let telefoneWhatsApp = atob("NTU1MTk4NTg2NjEzMw==");
     let linkWhatsApp = `https://wa.me/${telefoneWhatsApp}?text=${mensagemFormatada}`;
     window.open(linkWhatsApp, "_blank");
 }
