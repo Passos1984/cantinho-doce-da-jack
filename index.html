@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <img src="img/logo.jpeg" alt="Logo Açaí da Jack Bom" class="logo-header">
+    <link rel="stylesheet" href="style.css".
+    <title>Cantinho Doce Da Jack</title>
+</head>
+
+<body>
+    <header>
+        <h1>Cantinho Doce Da Jack</h1>
+        <p>O melhor açaí e Pastel da região direto no seu WhatsApp</p>
+    </header>
+
+    <main class="container-produtos">
+
+        <div class="card-produto">
+            <img src="img/Churros_tradicional.jpeg" alt="Churros Tradicional">
+            <div class="info-produto">
+                <h2>Churros Tradicional</h2>
+                <p>Clássico receipto com açúcar e canela!</p>
+                <span class="preco">R$ 14,00</span>
+            </div>
+            <button class="btn-adicionar" onclick="adicionarDireto('Churros Tradicional', 14)">+
+                Pedir Churros</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/churros_gorumet.png" alt="Churros Gourmet">
+            <div class="info-produto">
+                <h2>Churros Gourmet</h2>
+                <p>Delicioso com recheio e cobertura especial!</p>
+                <span class="preco">R$ 14,00</span>
+            </div>
+            <button class="btn-adicionar" onclick="adicionarDireto('Churros Gourmet', 14)">+
+                Pedir Churros</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/açaí_500ml.jpeg" alt="Copo de Açaí Completo">
+            <div class="info-produto">
+                <h2>Açaí Personalizado</h2>
+                <p>Escolha o tamanho e seus complementos favoritos!</p>
+                <span class="preco">A partir de R$ 10,00</span>
+            </div>
+            <button class="btn-adicionar" onclick="adicionarAoCarrinho('Açaí Personalizado', 0)">+
+                Montar Meu Açaí</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/barca _de _açai.jpeg" alt="Barca de açaí">
+            <div class="info-produto">
+                <h2>Barca Especial</h2>
+                <p>A maior e mais completa! Perfeita para compartilhar.</p>
+                <span class="preco">R$ 40,00</span>
+            </div>
+            <button class="btn-adicionar" onclick="adicionarDireto('Barca Especial', 40)">+
+                Pedir Barca</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/torrada_simples.png" alt="Torrada Simples">
+            <div class="info-produto">
+                <h2>Torrada Simples</h2>
+                <p>Deliciosa torrada simples.</p>
+                <span class="preco">R$ 12,00</span>
+            </div>
+            <button class="btn-adicionar" onclick="adicionarDireto('Torrada Simples', 12)">+
+                Pedir Torrada</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/pastel_doce.jpeg" alt="Pastel">
+            <div class="info-produto">
+                <h2>Pastéis</h2>
+                <p>Diversos sabores de pastel crocante!</p>
+                <span class="preco">A partir de R$ 10,00</span>
+            </div>
+            <button class="btn-adicionar" onclick="abrirModalPastel()">+
+                Escolher Sabor</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/crepe_doce.png" alt="Crepes">
+            <div class="info-produto">
+                <h2>Crepes</h2>
+                <p>Crepes saborosos com mesmos recheios!</p>
+                <span class="preco">A partir de R$ 8,00</span>
+            </div>
+            <button class="btn-adicionar" data-produto="Crepes" onclick="abrirModalCrepe()">+
+                Escolher Sabor</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/taça _de _cappuccino.jpeg" alt="Bebidas">
+            <div class="info-produto">
+                <h2>Bebidas</h2>
+                <p>Refrescos, cafés e mais!</p>
+                <span class="preco">A partir de R$ 3,50</span>
+            </div>
+            <button class="btn-adicionar" onclick="abrirModalBebidas()">+
+                Escolher Bebida</button>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/Combo_familia.jpeg" alt="Combo Família">
+            <div class="info-produto">
+                <h2>Combo Família</h2>
+                <p>2 copos 550ml + 2 copos 330ml. Ideal para toda família!</p>
+                <span class="preco">R$ 65,00</span>
+            </div>
+            <button class="btn-adicionar" onclick="abrirModalCombo()">+ Pedir Combo</button>
+        </div>
+
+    </main>
+
+    <!-- Modal Açaí Normal -->
+    <div id="modal-complementos" class="modal oculta">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" onclick="fecharModal()">X</span>
+            <h2 id="modal-titulo">Montando seu Açaí</h2>
+            <p id="modal-preco-base" style="color: #2e8b57; font-weight: bold;">R$ 0,00</p>
+
+            <div class="secao-tamanho">
+                <h3>Escolha o Tamanho</h3>
+                <div class="opcoes-tamanho">
+                    <label class="card-tamanho">
+                        <input type="radio" name="tamanho" value="200ml" data-preco="10" data-max="2">
+                        <div class="tamanho-info">
+                            <span class="tamanho-nome">200ml</span>
+                            <span class="tamanho-preco">R$ 10,00</span>
+                            <span class="tamanho-limite">+ 2 complementos grátis</span>
+                        </div>
+                    </label>
+                    <label class="card-tamanho">
+                        <input type="radio" name="tamanho" value="330ml" data-preco="15" data-max="4">
+                        <div class="tamanho-info">
+                            <span class="tamanho-nome">330ml</span>
+                            <span class="tamanho-preco">R$ 15,00</span>
+                            <span class="tamanho-limite">+ 4 complementos grátis</span>
+                        </div>
+                    </label>
+                    <label class="card-tamanho">
+                        <input type="radio" name="tamanho" value="550ml" data-preco="20" data-max="6">
+                        <div class="tamanho-info">
+                            <span class="tamanho-nome">550ml</span>
+                            <span class="tamanho-preco">R$ 20,00</span>
+                            <span class="tamanho-limite">+ 6 complementos grátis</span>
+                        </div>
+                    </label>
+                    <label class="card-tamanho">
+                        <input type="radio" name="tamanho" value="700ml" data-preco="25" data-max="7">
+                        <div class="tamanho-info">
+                            <span class="tamanho-nome">700ml</span>
+                            <span class="tamanho-preco">R$ 25,00</span>
+                            <span class="tamanho-limite">+ 7 complementos grátis</span>
+                        </div>
+                    </label>
+                    <label class="card-tamanho">
+                        <input type="radio" name="tamanho" value="Barca" data-preco="40" data-max="7">
+                        <div class="tamanho-info">
+                            <span class="tamanho-nome">Barca</span>
+                            <span class="tamanho-preco">R$ 40,00</span>
+                            <span class="tamanho-limite">+ 7 complementos grátis</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="secao-adicionais">
+                <h3>Frutas Grátis</h3>
+                <label><input type="checkbox" class="add-gratis" value="Banana"> Banana</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Manga"> Manga</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Morango"> Morango</label>
+            </div>
+
+            <div class="secao-adicionais">
+                <h3>Adicionais Grátis</h3>
+                <label><input type="checkbox" class="add-gratis" value="Leite em Pó"> Leite em Pó</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Leite Condensado"> Leite Condensado</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Confete"> Confete</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Chocoboll"> Chocoboll</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Paçoca"> Paçoca</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Granola"> Granola</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Coco Ralado"> Coco Ralado</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Bala de Goma"> Bala de Goma</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Marshmallow"> Marshmallow</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Cobertura Chocolate"> Cobertura
+                    Chocolate</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Cobertura Morango"> Cobertura
+                    Morango</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Granulado"> Granulado</label>
+            </div>
+
+            <div class="secao-adicionais">
+                <h3>Adicionais Pagos</h3>
+                <label><input type="checkbox" class="add-pago" value="Nutella" data-preco="8.00"> Nutella (+ R$
+                    8,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Pistache" data-preco="5.00"> Pistache (+ R$
+                    5,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Creme Ninho" data-preco="5.00"> Creme Ninho (+ R$
+                    5,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Creme de Avelã" data-preco="5.00"> Creme de Avelã
+                    (+ R$ 5,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Gotas de Chocolate" data-preco="4.00"> Gotas de
+                    Chocolate (+ R$ 4,00)</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Amendoim"> Amendoim</label><br>
+                <label><input type="checkbox" class="add-pago" value="Kit Kat" data-preco="4.00"> Kit Kat (+ R$
+                    4,00)</label>
+            </div>
+
+            <button class="btn-confirmar-modal" onclick="confirmarAcai()">Confirmar Adicionais</button>
+        </div>
+    </div>
+
+    <!-- Modal de Pastéis -->
+    <div id="modal-pastel" class="modal oculta">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" onclick="fecharModalPastel()">X</span>
+            <h2>Escolha seu Pastel</h2>
+            <div class="lista-pasteis">
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Carne com Ovo" data-preco="10">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Carne com Ovo</span>
+                        <span class="pastel-preco">R$ 10,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Frango com Queijo" data-preco="12">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Frango c/ Queijo</span>
+                        <span class="pastel-preco">R$ 12,00</span>
+                    </div>
+                </label>
+            </div>
+            <button class="btn-confirmar-modal" onclick="confirmarPastel()">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+
+    <!-- Modal de Crepes -->
+    <div id="modal-crepe" class="modal oculta">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" onclick="fecharModalCrepe()">X</span>
+            <h2>Escolha seu Crepe</h2>
+            <div class="lista-pasteis">
+                <label class="card-pastel">
+                    <input type="radio" name="crepe" value="Crepe Simples" data-preco="8">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Crepe Simples</span>
+                        <span class="pastel-preco">R$ 8,00</span>
+                    </div>
+                </label>
+            </div>
+            <button class="btn-confirmar-modal" onclick="confirmarCrepe()">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+
+    <!-- Modal de Bebidas -->
+    <div id="modal-bebidas" class="modal oculta">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" onclick="fecharModalBebidas()">X</span>
+            <h2>Escolha sua Bebida</h2>
+            <div class="lista-pasteis">
+                <label class="card-pastel">
+                    <input type="radio" name="bebida" value="Refrigerante Lata" data-preco="6">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Refrigerante Lata</span>
+                        <span class="pastel-preco">R$ 6,00</span>
+                    </div>
+                </label>
+            </div>
+            <button class="btn-confirmar-modal" onclick="confirmarBebida()">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+
+    <!-- MODAL DO COMBO FAMÍLIA -->
+    <div id="modal-combo" class="modal oculta">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" onclick="fecharModalCombo()">X</span>
+            <h2>Montando Combo Família</h2>
+            <p style="color: #2e8b57; font-weight: bold; margin-bottom: 15px;">R$ 65,00</p>
+
+            <!-- Copo 1 (550ml) -->
+            <div class="secao-tamanho">
+                <h3>Copo 1 (550ml) - Até 6 Grátis</h3>
+                <div class="secao-adicionais">
+                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Banana"> Banana</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Morango"> Morango</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Leite em Pó"> Leite em
+                        Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Leite Condensado"> Leite
+                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Paçoca"> Paçoca</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-pago" value="Nutella" data-preco="8.00">
+                        Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-pago" value="Creme Ninho" data-preco="5.00">
+                        Creme Ninho (+ R$ 5,00)</label>
+                </div>
+            </div>
+
+            <!-- Copo 2 (550ml) -->
+            <div class="secao-tamanho">
+                <h3>Copo 2 (550ml) - Até 6 Grátis</h3>
+                <div class="secao-adicionais">
+                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Banana"> Banana</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Morango"> Morango</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Leite em Pó"> Leite em
+                        Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Leite Condensado"> Leite
+                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Paçoca"> Paçoca</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-pago" value="Nutella" data-preco="8.00">
+                        Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-pago" value="Creme Ninho" data-preco="5.00">
+                        Creme Ninho (+ R$ 5,00)</label>
+                </div>
+            </div>
+
+            <!-- Copo 3 (330ml) -->
+            <div class="secao-tamanho">
+                <h3>Copo 3 (330ml) - Até 4 Grátis</h3>
+                <div class="secao-adicionais">
+                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Banana"> Banana</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Morango"> Morango</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Leite em Pó"> Leite em
+                        Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Leite Condensado"> Leite
+                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Paçoca"> Paçoca</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-pago" value="Nutella" data-preco="8.00">
+                        Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-pago" value="Creme Ninho" data-preco="5.00">
+                        Creme Ninho (+ R$ 5,00)</label>
+                </div>
+            </div>
+
+            <!-- Copo 4 (330ml) -->
+            <div class="secao-tamanho">
+                <h3>Copo 4 (330ml) - Até 4 Grátis</h3>
+                <div class="secao-adicionais">
+                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Banana"> Banana</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Morango"> Morango</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Leite em Pó"> Leite em
+                        Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Leite Condensado"> Leite
+                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Paçoca"> Paçoca</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-pago" value="Nutella" data-preco="8.00">
+                        Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-pago" value="Creme Ninho" data-preco="5.00">
+                        Creme Ninho (+ R$ 5,00)</label>
+                </div>
+            </div>
+
+            <button class="btn-confirmar-modal" onclick="confirmarCombo()">Adicionar Combo ao Carrinho</button>
+        </div>
+    </div>
+
+    <button id="btn-carrinho" class="carrinho-flutuante" onclick="abrirModalCarrinho()">
+        🛒 Ver Carrinho
+    </button>
+
+    <!-- Modal do Carrinho -->
+    <div id="modal-carrinho" class="modal oculta">
+        <div class="modal-conteudo">
+            <span class="fechar" onclick="fecharModalCarrinho()">&times;</span>
+            <h2>Seu Carrinho</h2>
+            <div id="lista-carrinho"></div>
+            <div class="total-carrinho">
+                <h3>Total: R$ <span id="total-carrinho">0,00</span></h3>
+            </div>
+            <button class="btn-confirmar-modal" onclick="finalizarPedido()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
