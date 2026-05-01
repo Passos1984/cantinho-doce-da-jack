@@ -20,12 +20,8 @@ const produtos = [
 // O resto do seu código começa aqui...
 let carrinho = [];
 let valorTotal = 0;
-// 1. Nossas caixas de memória
-let carrinho = [];
-let valorTotal = 0;
 
-// Lista de produtos indisponíveis (altere aqui para mudar a disponibilidade)
-// Use os nomes exatamente como aparecem nos botões
+// Lista de produtos indisponíveis
 const produtosIndisponiveis = [
     "Crepes"
 ];
