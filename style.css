@@ -266,6 +266,21 @@ header {
     overflow-y: auto;
 }
 
+/* 👇 NOVO: BOTÃO 'X' DE FECHAR OS MODAIS */
+.fechar-modal, .fechar {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: -5px;
+}
+
+.fechar-modal:hover, .fechar:hover {
+    color: #ff4d4d;
+}
+
 /* Scrollbar personalizada para mobile */
 .modal-conteudo::-webkit-scrollbar {
     width: 6px;

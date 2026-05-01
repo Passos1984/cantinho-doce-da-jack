@@ -8,18 +8,31 @@ const produtos = [
     { id: 1, nome: "Açaí Tradicional", preco: 15.00, categoria: "acai", img: "img/acai.jpg" },
     { id: 2, nome: "Barca de Açaí", preco: 35.00, categoria: "acai", img: "img/barca.jpg" },
 
-    // --- SEÇÃO DE PASTÉIS ---
-    { id: 10, nome: "Pastel de Carne", preco: 10.00, categoria: "pastel", img: "img/pastel-carne.jpg" },
-    { id: 11, nome: "Pastel de Queijo", preco: 10.00, categoria: "pastel", img: "img/pastel-queijo.jpg" },
-    { id: 12, nome: "Pastel Frango c/ Catupiry", preco: 12.00, categoria: "pastel", img: "img/pastel-frango.jpg" },
-    { id: 13, nome: "Pastel de Calabresa", preco: 10.00, categoria: "pastel", img: "img/pastel-calabresa.jpg" },
-    { id: 14, nome: "Pastel de Chocolate", preco: 12.00, categoria: "pastel", img: "img/pastel-chocolate.jpg" },
-    
-    // --- SEÇÃO DE BEBIDAS ---
-    { id: 30, nome: "Coca-Cola 350ml", preco: 6.00, categoria: "bebida" },
-    { id: 31, nome: "Guaraná 350ml", preco: 6.00, categoria: "bebida" },
-    { id: 32, nome: "Suco de Laranja 500ml", preco: 10.00, categoria: "bebida" },
-    { id: 33, nome: "Água Mineral 500ml", preco: 4.00, categoria: "bebida" }
+    // =========================
+    // 🥟 PASTÉIS (ATUALIZADOS)
+    // =========================
+    { id: 10, nome: "Pastel Carne Ovo", preco: 10.00, categoria: "pastel", img: "img/pastel_salgado.png" },
+    { id: 11, nome: "Pastel Carne Ovo Azeitona", preco: 10.00, categoria: "pastel", img: "img/pastel_salgado.png" },
+    { id: 12, nome: "Pastel Frango", preco: 10.00, categoria: "pastel", img: "img/pastel_salgado.png" },
+    { id: 13, nome: "Pastel Frango Azeitona", preco: 10.00, categoria: "pastel", img: "img/pastel_salgado.png" },
+    { id: 14, nome: "Pastel Frango com Queijo", preco: 12.00, categoria: "pastel", img: "img/pastel_salgado.png" },
+    { id: 15, nome: "Pastel Napolitano Tomate,Presunto,Queijo", preco: 12.00, categoria: "pastel", img: "img/pastel_salgado.png" },
+    { id: 16, nome: "Pastel Mistão", descricao: "Carne,Frango,Ovo,Queijo,Azeitona", preco: 12.00, categoria: "pastel", img: "img/pastel_salgado.png" },
+    { id: 17, nome: "Pastel Chocolate", preco: 12.00, categoria: "pastel", img: "img/pastel_doce.jpeg" },
+    { id: 18, nome: "Pastel doce de leite com Banana", preco: 12.00, categoria: "pastel", img: "img/pastel_doce.jpeg" },
+    { id: 19, nome: "Pastel Morango com Chocolate", preco: 12.00, categoria: "pastel", img: "img/pastel_doce.jpeg" },
+
+    // =========================
+    // 🥤 BEBIDAS (ATUALIZADAS)
+    // =========================
+    { id: 30, nome: "café", preco: 5.00, categoria: "bebida" },
+    { id: 31, nome: "Café Especial Capsula", preco: 8.00, categoria: "bebida" },
+    { id: 32, nome: "Chocolate Quente Quente 180ML", preco: 8.00, categoria: "bebida" },
+    { id: 33, nome: "Água", preco: 3.50, categoria: "bebida" },
+    { id: 34, nome: "Refrigerante Lata", preco: 6.00, categoria: "bebida" },
+    { id: 35, nome: "Refrigerante 200 ML", preco: 3.50, categoria: "bebida" },
+    { id: 36, nome: "Cerveja", preco: 8.00, categoria: "bebida" },
+    { id: 37, nome: "Quentão copo 180ML", preco: 7.00, categoria: "bebida" }
 ];
 
 // Caixas de memória

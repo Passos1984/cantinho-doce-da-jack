@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <img src="img/logo.jpeg" alt="Logo Açaí da Jack Bom" class="logo-header">
-    <link rel="stylesheet" href="style.css".
+    <link rel="stylesheet" href="style.css">
     <title>Cantinho Doce Da Jack</title>
 </head>
 
@@ -21,7 +21,7 @@
             <img src="img/Churros_tradicional.jpeg" alt="Churros Tradicional">
             <div class="info-produto">
                 <h2>Churros Tradicional</h2>
-                <p>Clássico receipto com açúcar e canela!</p>
+                <p>Clássico com açúcar e canela!</p>
                 <span class="preco">R$ 14,00</span>
             </div>
             <button class="btn-adicionar" onclick="adicionarDireto('Churros Tradicional', 14)">+
@@ -188,28 +188,20 @@
                 <label><input type="checkbox" class="add-gratis" value="Coco Ralado"> Coco Ralado</label><br>
                 <label><input type="checkbox" class="add-gratis" value="Bala de Goma"> Bala de Goma</label><br>
                 <label><input type="checkbox" class="add-gratis" value="Marshmallow"> Marshmallow</label><br>
-                <label><input type="checkbox" class="add-gratis" value="Cobertura Chocolate"> Cobertura
-                    Chocolate</label><br>
-                <label><input type="checkbox" class="add-gratis" value="Cobertura Morango"> Cobertura
-                    Morango</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Cobertura Chocolate"> Cobertura Chocolate</label><br>
+                <label><input type="checkbox" class="add-gratis" value="Cobertura Morango"> Cobertura Morango</label><br>
                 <label><input type="checkbox" class="add-gratis" value="Granulado"> Granulado</label>
             </div>
 
             <div class="secao-adicionais">
                 <h3>Adicionais Pagos</h3>
-                <label><input type="checkbox" class="add-pago" value="Nutella" data-preco="8.00"> Nutella (+ R$
-                    8,00)</label><br>
-                <label><input type="checkbox" class="add-pago" value="Pistache" data-preco="5.00"> Pistache (+ R$
-                    5,00)</label><br>
-                <label><input type="checkbox" class="add-pago" value="Creme Ninho" data-preco="5.00"> Creme Ninho (+ R$
-                    5,00)</label><br>
-                <label><input type="checkbox" class="add-pago" value="Creme de Avelã" data-preco="5.00"> Creme de Avelã
-                    (+ R$ 5,00)</label><br>
-                <label><input type="checkbox" class="add-pago" value="Gotas de Chocolate" data-preco="4.00"> Gotas de
-                    Chocolate (+ R$ 4,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Nutella" data-preco="8.00"> Nutella (+ R$ 8,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Pistache" data-preco="5.00"> Pistache (+ R$ 5,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Creme Ninho" data-preco="5.00"> Creme Ninho (+ R$ 5,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Creme de Avelã" data-preco="5.00"> Creme de Avelã (+ R$ 5,00)</label><br>
+                <label><input type="checkbox" class="add-pago" value="Gotas de Chocolate" data-preco="4.00"> Gotas de Chocolate (+ R$ 4,00)</label><br>
                 <label><input type="checkbox" class="add-gratis" value="Amendoim"> Amendoim</label><br>
-                <label><input type="checkbox" class="add-pago" value="Kit Kat" data-preco="4.00"> Kit Kat (+ R$
-                    4,00)</label>
+                <label><input type="checkbox" class="add-pago" value="Kit Kat" data-preco="4.00"> Kit Kat (+ R$ 4,00)</label>
             </div>
 
             <button class="btn-confirmar-modal" onclick="confirmarAcai()">Confirmar Adicionais</button>
@@ -222,10 +214,32 @@
             <span class="fechar-modal" onclick="fecharModalPastel()">X</span>
             <h2>Escolha seu Pastel</h2>
             <div class="lista-pasteis">
+                <!-- Pastéis Salgados -->
                 <label class="card-pastel">
-                    <input type="radio" name="pastel" value="Pastel Carne com Ovo" data-preco="10">
+                    <input type="radio" name="pastel" value="Pastel Carne Ovo" data-preco="10">
                     <div class="pastel-info">
-                        <span class="pastel-nome">Carne com Ovo</span>
+                        <span class="pastel-nome">Carne Ovo</span>
+                        <span class="pastel-preco">R$ 10,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Carne Ovo Azeitona" data-preco="10">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Carne Ovo Azeitona</span>
+                        <span class="pastel-preco">R$ 10,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Frango" data-preco="10">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Frango</span>
+                        <span class="pastel-preco">R$ 10,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Frango Azeitona" data-preco="10">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Frango Azeitona</span>
                         <span class="pastel-preco">R$ 10,00</span>
                     </div>
                 </label>
@@ -233,6 +247,42 @@
                     <input type="radio" name="pastel" value="Pastel Frango com Queijo" data-preco="12">
                     <div class="pastel-info">
                         <span class="pastel-nome">Frango c/ Queijo</span>
+                        <span class="pastel-preco">R$ 12,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Napolitano Tomate,Presunto,Queijo" data-preco="12">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Napolitano</span>
+                        <span class="pastel-preco">R$ 12,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Mistão" data-preco="12">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Mistão</span>
+                        <span class="pastel-preco">R$ 12,00</span>
+                    </div>
+                </label>
+                <!-- Pastéis Doces -->
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Chocolate" data-preco="12">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Chocolate</span>
+                        <span class="pastel-preco">R$ 12,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel doce de leite com Banana" data-preco="12">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Doce de Leite c/ Banana</span>
+                        <span class="pastel-preco">R$ 12,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="pastel" value="Pastel Morango com Chocolate" data-preco="12">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Morango c/ Chocolate</span>
                         <span class="pastel-preco">R$ 12,00</span>
                     </div>
                 </label>
@@ -266,10 +316,59 @@
             <h2>Escolha sua Bebida</h2>
             <div class="lista-pasteis">
                 <label class="card-pastel">
+                    <input type="radio" name="bebida" value="café" data-preco="5">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Café</span>
+                        <span class="pastel-preco">R$ 5,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="bebida" value="Café Especial Capsula" data-preco="8">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Café Esp. Cápsula</span>
+                        <span class="pastel-preco">R$ 8,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="bebida" value="Chocolate Quente Quente 180ML" data-preco="8">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Chocolate Quente 180ml</span>
+                        <span class="pastel-preco">R$ 8,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="bebida" value="Água" data-preco="3.5">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Água</span>
+                        <span class="pastel-preco">R$ 3,50</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
                     <input type="radio" name="bebida" value="Refrigerante Lata" data-preco="6">
                     <div class="pastel-info">
                         <span class="pastel-nome">Refrigerante Lata</span>
                         <span class="pastel-preco">R$ 6,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="bebida" value="Refrigerante 200 ML" data-preco="3.5">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Refrigerante 200ml</span>
+                        <span class="pastel-preco">R$ 3,50</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="bebida" value="Cerveja" data-preco="8">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Cerveja</span>
+                        <span class="pastel-preco">R$ 8,00</span>
+                    </div>
+                </label>
+                <label class="card-pastel">
+                    <input type="radio" name="bebida" value="Quentão copo 180ML" data-preco="7">
+                    <div class="pastel-info">
+                        <span class="pastel-nome">Quentão Copo 180ml</span>
+                        <span class="pastel-preco">R$ 7,00</span>
                     </div>
                 </label>
             </div>
@@ -290,15 +389,11 @@
                 <div class="secao-adicionais">
                     <label><input type="checkbox" class="combo-copo1 add-gratis" value="Banana"> Banana</label><br>
                     <label><input type="checkbox" class="combo-copo1 add-gratis" value="Morango"> Morango</label><br>
-                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Leite em Pó"> Leite em
-                        Pó</label><br>
-                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Leite Condensado"> Leite
-                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Leite em Pó"> Leite em Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-gratis" value="Leite Condensado"> Leite Condensado</label><br>
                     <label><input type="checkbox" class="combo-copo1 add-gratis" value="Paçoca"> Paçoca</label><br>
-                    <label><input type="checkbox" class="combo-copo1 add-pago" value="Nutella" data-preco="8.00">
-                        Nutella (+ R$ 8,00)</label><br>
-                    <label><input type="checkbox" class="combo-copo1 add-pago" value="Creme Ninho" data-preco="5.00">
-                        Creme Ninho (+ R$ 5,00)</label>
+                    <label><input type="checkbox" class="combo-copo1 add-pago" value="Nutella" data-preco="8.00"> Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo1 add-pago" value="Creme Ninho" data-preco="5.00"> Creme Ninho (+ R$ 5,00)</label>
                 </div>
             </div>
 
@@ -308,15 +403,11 @@
                 <div class="secao-adicionais">
                     <label><input type="checkbox" class="combo-copo2 add-gratis" value="Banana"> Banana</label><br>
                     <label><input type="checkbox" class="combo-copo2 add-gratis" value="Morango"> Morango</label><br>
-                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Leite em Pó"> Leite em
-                        Pó</label><br>
-                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Leite Condensado"> Leite
-                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Leite em Pó"> Leite em Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-gratis" value="Leite Condensado"> Leite Condensado</label><br>
                     <label><input type="checkbox" class="combo-copo2 add-gratis" value="Paçoca"> Paçoca</label><br>
-                    <label><input type="checkbox" class="combo-copo2 add-pago" value="Nutella" data-preco="8.00">
-                        Nutella (+ R$ 8,00)</label><br>
-                    <label><input type="checkbox" class="combo-copo2 add-pago" value="Creme Ninho" data-preco="5.00">
-                        Creme Ninho (+ R$ 5,00)</label>
+                    <label><input type="checkbox" class="combo-copo2 add-pago" value="Nutella" data-preco="8.00"> Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo2 add-pago" value="Creme Ninho" data-preco="5.00"> Creme Ninho (+ R$ 5,00)</label>
                 </div>
             </div>
 
@@ -326,15 +417,11 @@
                 <div class="secao-adicionais">
                     <label><input type="checkbox" class="combo-copo3 add-gratis" value="Banana"> Banana</label><br>
                     <label><input type="checkbox" class="combo-copo3 add-gratis" value="Morango"> Morango</label><br>
-                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Leite em Pó"> Leite em
-                        Pó</label><br>
-                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Leite Condensado"> Leite
-                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Leite em Pó"> Leite em Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-gratis" value="Leite Condensado"> Leite Condensado</label><br>
                     <label><input type="checkbox" class="combo-copo3 add-gratis" value="Paçoca"> Paçoca</label><br>
-                    <label><input type="checkbox" class="combo-copo3 add-pago" value="Nutella" data-preco="8.00">
-                        Nutella (+ R$ 8,00)</label><br>
-                    <label><input type="checkbox" class="combo-copo3 add-pago" value="Creme Ninho" data-preco="5.00">
-                        Creme Ninho (+ R$ 5,00)</label>
+                    <label><input type="checkbox" class="combo-copo3 add-pago" value="Nutella" data-preco="8.00"> Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo3 add-pago" value="Creme Ninho" data-preco="5.00"> Creme Ninho (+ R$ 5,00)</label>
                 </div>
             </div>
 
@@ -344,15 +431,11 @@
                 <div class="secao-adicionais">
                     <label><input type="checkbox" class="combo-copo4 add-gratis" value="Banana"> Banana</label><br>
                     <label><input type="checkbox" class="combo-copo4 add-gratis" value="Morango"> Morango</label><br>
-                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Leite em Pó"> Leite em
-                        Pó</label><br>
-                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Leite Condensado"> Leite
-                        Condensado</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Leite em Pó"> Leite em Pó</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-gratis" value="Leite Condensado"> Leite Condensado</label><br>
                     <label><input type="checkbox" class="combo-copo4 add-gratis" value="Paçoca"> Paçoca</label><br>
-                    <label><input type="checkbox" class="combo-copo4 add-pago" value="Nutella" data-preco="8.00">
-                        Nutella (+ R$ 8,00)</label><br>
-                    <label><input type="checkbox" class="combo-copo4 add-pago" value="Creme Ninho" data-preco="5.00">
-                        Creme Ninho (+ R$ 5,00)</label>
+                    <label><input type="checkbox" class="combo-copo4 add-pago" value="Nutella" data-preco="8.00"> Nutella (+ R$ 8,00)</label><br>
+                    <label><input type="checkbox" class="combo-copo4 add-pago" value="Creme Ninho" data-preco="5.00"> Creme Ninho (+ R$ 5,00)</label>
                 </div>
             </div>
 
